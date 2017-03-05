@@ -1,0 +1,298 @@
+\documentclass[a4paper]{article}
+\usepackage[textwidth=17cm, textheight=25cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{enumerate}
+\usepackage{multicol} % multiple collums in enumerate
+
+\title{Mathematik Begabtenkurs JWG März 2017}
+\author{Maximilian Starke}
+\date{\today}
+
+\usepackage[thmmarks,amsmath,hyperref,noconfig]{ntheorem} 
+  % erlaubt es, Sätze, Definitionen etc. einfach durchzunummerieren.
+\newtheorem{satz}{Satz}[section] % Nummerierung nach Abschnitten
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{korollar}[satz]{Korollar}
+
+\theorembodyfont{\upshape}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem{definition}[satz]{Definition} %[section]
+
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremseparator{.}
+\theoremsymbol{\ensuremath{_\blacksquare}}
+\newtheorem{beweis}{Beweis}
+\qedsymbol{\ensuremath{_\blacksquare}}
+
+
+
+\begin{document}
+\maketitle
+% \tableofcontents
+
+
+\part{Aussagenlogik in der Mathematik}
+
+\section{Aussagen}
+
+\begin{definition}\label{d:aussage}
+Eine Aussage ist ein wohldefinierter mathematischer Ausdruck, der entweder 1 (= wahr, true) oder 0 (= falsch, false) ist. Formal handelt es sich um einen verketteten Funktionsaufruf von endlicher Tiefe. 
+\end{definition}
+
+\begin{beispiel}
+	$1$ ist eine wahre Aussage. $0$ ist eine falsche Aussage. Die Tiefe des verketteten Funktionsaufrufes ist jeweils $null$. Auch $(5\mid21) = wahr$ ist eine (zugegebenermaßen \textit{falsche}) Aussage. Hier beträgt die Tiefe $zwei$, da auf oberster Ebene eine Gleichheit behauptet wird und auf der linken Seite auf nächst tieferer Ebene eine Teilerbeziehung ($5$ teilt $21$). $5\mid21$ ist bekanntlich falsch, $falsch=wahr$ und damit die gesamte Aussage ist folglich auch falsch.
+	
+	\begin{multicols}{2}
+		\begin{enumerate}[(a)]
+			\item $7$ ist eine Primzahl.
+			\item $2$ ist Teiler von $4$.
+			\item $1=2-1$
+			\item $3\cdot7=21$
+			\item Es gibt unendlich viele Primzahlen.
+			\item $6$ ist eine ungerade Zahl.
+			\item $3$ lässt sich als Summe von geraden Zahlen darstellen.
+			\item $5+6=10$
+			\item $80\div7=10$
+			\item $2+x=5$
+			\item $2\cdot(x+3)=2\cdot x+6$
+			\item $3$ ist kein Teiler von $4$ und $p=wahr$.
+			\item Für alle natürlichen Zahlen $n$ gilt: $2\cdot n = n+n$
+			\item Es existiert eine natürliche Zahl $x$ mit ${234<x<235}$.
+		\end{enumerate}
+	\end{multicols}
+
+Beispiele (a) bis (e) sind wahre Aussagen und (f) bis (i) falsche Aussagen. Dagegen sind (j) bis (l) keine Aussagen. (m) ist eine wahre Aussage, (n) wiederum eine falsche Aussage.
+\end{beispiel}
+
+
+\section{Operationen auf Aussagen}
+
+Auf Aussagen werden eine Reihe von Operationen (auch \textit{Abbildungen} oder \textit{Funtionen} genannt) definiert. Mittels der so eingeführten \textit{(Funktions-)} Symbole, die häufig Operatoren genannt werden, können aus vorhandenen Aussagen neue konstruiert werden. Seien im Folgenden $A$ und $B$ Aussagen. Dafür schreibt man auch $A,B \in \lbrace wahr, falsch \rbrace$ oder $A,B \in \lbrace W,F \rbrace$ oder $A,B \in \lbrace 0, 1 \rbrace$ oder noch kürzer, aber weniger gebräuchlich $A,B \in 2$, sofern $2$ mit $2:= \lbrace 0, 1 \rbrace$ eingeführt wird.
+
+\begin{definition}[Negation]
+$\neg:\lbrace 0,1 \rbrace\to \lbrace 0,1 \rbrace :  A \mapsto \neg A$ mit $\neg 0 := 1$ und
+$\neg 1 := 0$
+\begin{multicols}{2}
+	Oder als Tabelle: \hspace{9mm}
+	\begin{tabular}{|c|c|} %l=left; auch c=center, r=right
+		\hline
+		$A$ & $\neg A$ \\
+		\hline
+		$0$ & $1$
+		\\
+		$1$ & $0$
+		\\
+		\hline
+	\end{tabular} \\
+	Oder in Worten: \\ Die Negation von einer wahren Aussage ist als falsch definiert, die Negation der falschen Aussage ist wahr.
+\end{multicols}
+Den Ausdruck $\neg A$ liest man als \glqq nicht A\grqq .
+\end{definition}
+
+\begin{definition}[Konjunktion, Disjunktion, Implikation, Äquivalenz] Neben der einstelligen Negation gibt es mehrere allgemein gebräuchliche zweistellige Operationen auf Aussagen:
+
+\begin{center}
+\begin{tabular}{lc}
+	Konjunktion: $\land : 2 \times 2 \to 2 : (A,B) \mapsto A \land B$ &
+		(sprich \glqq A und B\grqq )\\
+	Disjunktion: $\lor : 2 \times 2 \to 2 : (A,B) \mapsto A \lor B$ &
+		(sprich \glqq A oder B\grqq )\\
+	Implikation: $\Rightarrow : 2 \times 2 \to 2 : (A,B) \mapsto A \Rightarrow B$ &
+		(sprich \glqq wenn A, dann B\grqq , auch \glqq A impliziert B\grqq )\\
+	Äquivalenz: $\Leftrightarrow : 2 \times 2 \to 2 : (A,B) \mapsto A \Leftrightarrow B$ &
+		(sprich \glqq A genau dann, wenn B\grqq, auch \glqq A ist äquivalent zu B\grqq )
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	$A$ & $B$ & $A\land B$ & $A\lor B$ & $A\Rightarrow B$ & $A\Leftrightarrow B$ \\
+	\hline
+	0 & 0 & 0 & 0 & 1 & 1 \\
+	\hline
+	0 & 1 & 0 & 1 & 1 & 0 \\
+	\hline
+	1 & 0 & 0 & 1 & 0 & 0 \\
+	\hline
+	1 & 1 & 1 & 1 & 1 & 1 \\
+	\hline 
+\end{tabular}
+\end{center}
+\end{definition}
+\begin{bemerkung}
+Häufig entstehen Fehler, indem nicht beachtet wird, dass eine \textbf{oder}-Verknüpfung stets genau dann wahr ist, wenn \textit{mindestens eine} ihrer Teilaussagen wahr ist. Dagegen benutzt man in der Mathematik die Formulierung \glqq \textbf{entweder} $A$ \textbf{oder} $B$\grqq , um auszudrücken, dass \textit{genau eine} von beiden Aussagen wahr ist, auch \textit{exklusives Oder} genannt.
+
+Eine noch häufigere Fehlerquelle ist die Implikation. $A\Rightarrow B$ ist genau dann falsch, wenn $A$ wahr und $B$ falsch ist, in Symbolen $(A\Rightarrow B) \Leftrightarrow \neg (A \land \neg B)$. Dann und nur dann besteht ein Widerspruch der Wahrheitswertebelegung für $A$ und $B$ zu der angegebenen Implikation. Bei einer Implikation $A \Rightarrow B$ nennt man die Prämisse $A$ auch \textbf{hinreichende Bedingung} und die Konklusion $B$ \textbf{notwendige Bedingung}. Es reicht also aus, wenn die hinreichende Bedingung falsch oder die notwendige Bedingung wahr ist, damit die Implikation wahr ist.
+\end{bemerkung}
+\begin{bemerkung}
+Insbesondere die Operationen $\Rightarrow$ und $\Leftrightarrow$ können auch als Relationen aufgefasst werden. Diese Intuition entspricht schon eher dem Gebrauch der Symbole beim mathematisch korrekten Schließen bzw. Beweisen. Die Bedeutung von Implikation und Äquivalenz ändert sich dadurch nicht wesentlich.
+\end{bemerkung}
+
+\begin{satz}\label{s:IdemAssoKomm}
+Ähnlich wie für Addition und Multiplikation gelten für Konjunktion und Disjunktion Assoziativ-, Kommutativ- sowie Distributivgesetze. Seien $A,B$ und $C$ Aussagen. Dann gilt:
+\begin{center}
+\begin{tabular}{lll}
+	Idempotenz: & $A \land A \Leftrightarrow A$ & $A \lor A \Leftrightarrow A$ \\
+	Assoziativität: & $(A \land B) \land C \Leftrightarrow A \land (B \land C)$ &
+	$(A \lor B) \lor C \Leftrightarrow A \lor (B \lor C)$ \\
+	Kommutativität: & $A \land B \Leftrightarrow B \land A$ &
+	$A \lor B \Leftrightarrow B \lor A$ \\
+	Distributivität: & $A \land (B \lor C) \Leftrightarrow (A \land B) \lor (A \land C)$ &
+	$A \lor (B \land C) \Leftrightarrow (A \lor B) \land (A \lor C)$
+\end{tabular}
+\end{center}
+\end{satz}
+\begin{beweis}
+Der Beweis ist trivial und erfolgt über Wahrheitstabellen. \textit{(siehe Übungsaufgaben)}
+\end{beweis}
+
+\begin{proposition}[Ersetzungsregeln und De Morgan] \hspace{1cm} 
+
+\begin{center}
+\begin{tabular}{c}
+Es gelten folgende Ersetzungsregeln \\
+für Implikation und Äquivalenz\\
+sowie die De Morgan'schen Gesetzte\\
+für Und und Oder:
+\end{tabular}
+\begin{tabular}{|c l|}
+	\hline
+	Implikation & $A \Rightarrow B$ \\
+	$\Leftrightarrow$ & $\neg A \lor B$\\
+	$\Leftrightarrow$ & $\neg (A \land \neg B)$\\
+	\hline
+	Äquivalenz & $A \Leftrightarrow B$\\
+	$\Leftrightarrow$ & $(A \Rightarrow B) \land (B \Rightarrow A)$\\
+	$\Leftrightarrow$ & $(A \land B) \lor (\neg A \land \neg B)$\\
+	$\Leftrightarrow$ & $(A \lor \neg B) \land (\neg A \lor B)$\\	
+	\hline
+\end{tabular}
+\begin{tabular}{|c|}
+	\hline
+	Regeln von De Morgan \\
+	\hline
+	\\
+	$(\neg A \land \neg B) \Leftrightarrow \neg (A \lor B)$\\
+	\\
+	$(\neg A \lor \neg B) \Leftrightarrow \neg (A \land B)$\\
+	\\
+	\hline
+\end{tabular}
+\end{center}
+
+\end{proposition}
+
+\begin{beweis}
+Der Beweis ist wie bei Satz~\ref{s:IdemAssoKomm} trivial und erfolgt über Wahrheitstabellen. \textit{(siehe Übungsaufgaben)}
+\end{beweis}
+
+
+\section{Prädikate und Aussageformen}
+Oft sagt man in der Mathematik etwas \textit{über Objekte} aus, seien es Zahlen oder gar andere Objekte wie Graphen, Gruppen, Vektorräume, und vieles mehr. Dazu führt man häufig Variablen ein, gern mit $x$ bezeichnet. Zum Beispiel kann folgendes gefragt werden:
+\begin{center}
+Sei $x$ eine natürliche Zahl. Das Quadrat von $x$ ist Teiler von $100$.\\
+Bestimmen Sie alle $x$, für die obige \dots (ja, was denn? \dots Aussage???) gilt.
+\end{center}
+
+Offenbar wird mit \glqq Das Quadrat von $x$ ist Teiler von $100$.\grqq{} etwas Bestimmtes \textit{über} $x$ ausgesagt, aber laut Definition~\ref{d:aussage} ist es keine Aussage. Die richtige Bezeichnung lautet hier \textit{Prädikat}. Intuitiv kann man ein Prädikat als Aussage in Abhängigkeit von einem Objekt über das Objekt verstehen. Informell kann man sich merken \glqq Prädikat = Aussage + Variablen\grqq{}. Ein Prädikat beschreibt eine Eigenschaft von Objekten.
+
+\begin{definition}[Prädikat]
+Ein Prädikat ist eine Funktion (oftmal mit $P$ bezeichnet), deren Zielbereich die Menge der Aussagen $\lbrace 0,1 \rbrace$ ist. Sei $M$ eine nichtleere Menge. $P : M \to \lbrace 0,1 \rbrace$
+\end{definition}
+
+\begin{bemerkung}
+Ein Prädikat kann einstellig oder (endlich) mehrstellig sein. Einstellige Prädikate sagen über ein Objekt etwas aus, k-stellige Prädikate über ein Tupel von k Objekten. Sämtliche Funktionen sind Prädikate, sofern sie jeweils nur auf wahr oder falsch abbilden.
+\end{bemerkung}
+
+\begin{beispiel}
+Ein einstelliges Prädikat $P$ ist beispielsweise definiert durch
+\[
+P(x):= 2 \mid x
+\]
+Man kann in diesem Fall auch \glqq \dots ist eine gerade Zahl\grqq{} für P schreiben. Ein weiteres einstelliges Prädikat ist \glqq \dots ist ein Teiler von $14$\grqq. Dieses ist offensichtlich für die Zahlen $1$, $2$, $7$ und $14$ wahr und für alle anderen Zahlen falsch. Ein zweistelliges Prädikat ist beispielsweise \glqq ist Teiler von\grqq{}. In Symbolen:
+\[
+P(x,y):= x \mid y
+\]
+Hier müssen für zwei Variablen Werte eingesetzt werden, damit eine Aussage entsteht. So ist dann zum Beispiel $P(3,21)=wahr$, weil $3$ ein Teiler von $21$ ist und $P(5,7)=falsch$, weil $5$ kein Teiler von $7$ ist.
+\end{beispiel}
+
+\begin{definition}[Aussageform]
+Eine Aussageform ist ein Prädikat, bei dem alle Variablen aussagenlogische Variablen sind, also nur die Werte wahr und falsch annehmen dürfen.
+\end{definition}
+
+\begin{beispiel}\label{b:Aussageform}
+Seien $A,B$ und $C$ aussagenlogische Variablen. Dann ist \[(A \Rightarrow (B \lor C)) \land B \land (A \lor \neg B)\] eine Aussageform. Oft wird nach Lösungen für eine solche Aussageform gefragt. Zum Bestimmen aller Lösungen der obigen Aussageform kann man alle möglichen Belegungen der drei Variablen einsetzen und jeweils das Ergebnis ausrechnen. Man kann jedoch auch durch geschicktes Hinsehen die Lösung(en) ablesen:
+\begin{itemize}
+\item Die Aussageform ist eine Und-Verknüpfung mehrerer Teilaussagen, u.a. taucht die Variable $B$ dort einzeln auf. Wenn die Und-Verknüpfung wahr sein soll, müssen alle Teilformeln, also auch $B$, wahr sein.
+\item Wir wissen, dass wenn es überhaupt eine Lösung gibt, $B = wahr$ gilt und betrachten als nächstes den rechten Ausdruck $A \lor \neg B$. Da $B$ wahr ist, ist $\neg B$ falsch. Also muss $A$ wahr sein, damit die Formel erfüllbar sein kann.
+\item Wir wissen bisher, dass $A = wahr \land B = wahr$ gilt. Leicht ist zu sehen, dass dann auch für C beliebig der linke Ausdruck $A \Rightarrow (B \lor C)$ wahr ist.
+\end{itemize}
+Die Aussageform von Beispiel~\ref{b:Aussageform} hat also genau zwei gültige Variablenbelegungen, nämlich $(A,B,C) = (1,1,0)$ und $(A,B,C) = (1,1,1)$
+\end{beispiel}
+
+\begin{definition}[Tautologie]
+Eine Tautologie ist eine Aussageform, die für alle Variablenbelegungen wahr ist.
+\end{definition}
+
+\begin{beispiel}
+$A \lor \neg A$ ist eine Tautologie wie auch $(A \Rightarrow B) \lor (B \Rightarrow A)$.
+\end{beispiel}
+
+\section{Quantoren}
+
+Eine Möglichkeit, um aus Prädikaten wieder Aussagen zu konstruieren, sind Quantoren. Oft möchte man eine Aussage über die Gesamtheit aller Objekte einer Menge z.B. über die Gesamtheit der natürlichen Zahlen treffen oder eine Existenzaussage über ein Objekt innerhalb einer Menge. Zum Beispiel ist die Aussage \glqq Es existiert eine natürliche Zahl $x$ mit $x \geq 1024$\grqq{} eine solche Konstruktion.
+
+Für eine Menge $M$ von Objekten und ein Prädikat $P: M \to \lbrace 0,1 \rbrace$ schreibt man:
+\begin{center}
+\begin{tabular}{cc}
+	mathematische Schreibweise & Bedeutung\\
+	$\forall x \in M : P(x)$ & Für alle Objekte $x$ aus der Menge $M$ gilt $P(x)$ \\
+	$\exists x \in M : P(x)$ & Es existiert ein Objekt $x$ in der Menge $M$, für welches $P(x)$ gilt.
+\end{tabular}
+\end{center}
+
+
+\part{Der nun folgende Teil des Dokumentes ist noch in Arbeit und besteht größtenteils aus Ideensammlungen und Auflistungen möglicher Themen für die Förderung begabter Schüler}
+
+\part{Rechnen mit Kongruenzen}
+
+Vielleicht ist dem einen oder anderen schon einmal aufgefallen, dass, wenn er zwei gerade Zahlen addiert oder subtrahiert, das Ergebnis stets auch eine gerade Zahl ist. Ebenso fällt beim Addierten zweier ungerader Zahlen auf, dass das Ergebnis eine gerade Zahl ist. In diesem Kapitel wollen wir uns etwas Klarheit darüber verschaffen, warum das so ist.
+
+\section{Teiler}
+
+\begin{definition}
+Seien $a , b \in \mathbb{Z}$ zwei ganze Zahlen. $a$ heißt genau dann Teiler von $b$, wenn es eine ganze Zahl $m \in \mathbb{Z}$ gibt, sodass $a \cdot m = b$ gilt. In Symbolen
+\[ a \mid b : \Leftrightarrow \exists m \in \mathbb{Z} : a \cdot m = b \]
+Ist dagegen $a$ kein Teiler von $b$, schreibt man auch $a \nmid b$.
+\end{definition}
+
+\begin{beispiel} \hspace{1cm}\\
+\begin{tabular}{ccccc}
+	$2 \mid 2$ & $2 \mid 4$ & $2\mid 6$ & $2 \mid 18$ & $2 \mid 98$ \\
+	$3 \mid 6$ & $3 \mid 15$ & $3 \mid 30$ & $3 \mid 33$ & $3 \mid 3$ \\
+\end{tabular}
+\end{beispiel}
+
+
+\part{Elementare Beweismethoden}
+
+direkter Beweis, indirekter Beweis, vollständige Induktion\\
+$0+1+2+ \dots + n = n \cdot (n+1) \div 2$
+
+\part{Gleichungen, Ungleichungen und Gleichungssysteme}
+
+Lineare Gleichungssysteme, quasi-lineare GS:\\
+$x^2 y - 2xy = 6$\\
+$x^2 + 3 x = 36 \div y$
+
+\part{Mengen}
+zurzeit für die Schüler eher unwichtig
+
+\end{document}
