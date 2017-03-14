@@ -261,11 +261,10 @@ Für eine Menge $M$ von Objekten und ein Prädikat $P: M \to \lbrace 0,1 \rbrace
 \end{center}
 
 
-%\part{Der nun folgende Teil des Dokumentes ist noch in Arbeit und besteht größtenteils aus Ideensammlungen und Auflistungen möglicher Themen für die Förderung begabter Schüler}
 
 \part{Rechnen mit Kongruenzen}
 
-Vielleicht ist dem einen oder anderen schon einmal aufgefallen, dass, wenn er zwei gerade Zahlen addiert oder subtrahiert, das Ergebnis stets auch eine gerade Zahl ist. Ebenso fällt beim Addierten zweier ungerader Zahlen auf, dass das Ergebnis eine gerade Zahl ist. In diesem Kapitel wollen wir uns etwas Klarheit darüber verschaffen, warum das so ist.
+Vielleicht ist dem einen oder anderen schon einmal aufgefallen, dass, wenn er zwei gerade Zahlen addiert oder subtrahiert, das Ergebnis stets auch eine gerade Zahl ist. Ebenso fällt beim Addierten zweier ungerader Zahlen auf, dass das Ergebnis eine gerade Zahl ist. Addiert man jedoch eine gerade Zahl zu einer ungeraden, dann ist das Ergebnis eine ungerade Zahl. Im folgenden Teil wollen wir uns etwas Klarheit darüber verschaffen.
 
 \section{Teiler}
 
@@ -344,6 +343,14 @@ Gleichung (4) ist mit etwas größerer Vorsicht zu genießen. Wenn man $1 \div x
 Mittels der Rechenregeln von Satz \ref{s:mod} ist es möglich, den Rechenaufwand erheblich zu reduzieren, wenn nicht nach exakten Zahlen, sondern bestimmten Resten gefragt wird. So ist zum Beispiel $25497 + 45038 + 45938 + 1234 \bmod 3 = 0 + 2 + 2 + 1 \bmod 3 = 2$. Die Summe dieser beachtlich großen Zahlen, lässt also beim Teilen durch $3$ den Rest $2$. Dafür haben wir die Zahlen nur kurz angesehen und auch keinen Taschenrechner benötigt.
 \end{beispiel}
 
+\begin{beispiel}
+Wie lautet die letzte Ziffer von $2017^{2017}$?
+
+
+Dazu betrachten wir die Zahl $2017^{2017} \bmod 10$. Das ist ein Produkt von 2017 gleichen Zahlen. Laut Satz \ref{s:mod} ist dann die letzte Ziffer gleich der letzten Ziffer von $7^{2017}$. Weiterhin gilt $7^{2017} \equiv 7^{2 \cdot 1008 + 1} \equiv 7 \cdot (7^2)^{1008} \equiv 7 \cdot 49^{1008} \equiv 7 \cdot (-1)^{1008} \equiv 7 \pmod{10}$
+\end{beispiel}
+
+
 \section{Sätze über Teiler und Faktoren}
 
 \begin{satz}[Der euklidische Algorithmus]\label{s:eukl}
@@ -363,7 +370,7 @@ Nach Lemma~\ref{l:sumteiler} wissen wir, dass jeder gemeinsame Teiler von $a$ un
 Aus $ggT(a,b) \leq ggT(b,r)$ und $ggT(b,r) \leq ggT(a,b)$ folgt unmittelbar $ggT(a,b)=ggT(b,r)$ und damit die Behauptung.
 \end{beweis}
 
-\begin{korollar}[Lemma von Bézout]
+\begin{korollar}[Lemma von Bézout]\label{l:bez}
 Es seien $m,n \in \mathbb{N}$ mit der Einschränkung, dass nicht beide $0$ sind. Dann gibt es ganze Zahlen $a,b \in \mathbb{Z} $ mit $ggT(m,n) = am + bn$.
 \end{korollar}
 
@@ -381,10 +388,20 @@ Mit $a:= b'$ und $b:=a'-b'q$ folgt die [Induktions-] Behauptung.
 Wenn eine Primzahl das Produkt zweier natürlicher Zahlen teilt, dann teilt sie auch mindestens einen der Faktoren.
 \end{korollar}
 
+\begin{beweis}
+Seien $m,n \in \mathbb{N}$ zwei natürliche Zahlen. Weiterhin sei $p$ eine Primzahl mit $p \mid mn$. Angenommen $p$ ist kein Teiler von $n$. (Andernfalls wäre unser Beweis fertig.) Dann bleibt $p \mid m$ zu zeigen. Wir wissen bereits, dass $ggT(p,n) = 1$. Damit gibt es wegen Lemma \ref{l:bez} zwei ganze Zahlen $a,b \in \mathbb{Z}$ mit $1 = ap + bn$. Multipliziert man diese Gleichung mit $m$, so ergibt sich $m = p(am) + bmn$. Laut Voraussetzungen teilt $p$ den Summanden $bmn$ und offensichtlich auch $p(am)$. Wegen Lemma \ref{l:sumteiler} teilt $p$ also auch $m$.
+\end{beweis}
+
+
+\part{Der nun folgende Teil des Dokumentes ist noch in Arbeit und besteht größtenteils aus Ideensammlungen und Auflistungen möglicher Themen für die Förderung begabter Schüler}
+
+
+
 \part{Elementare Beweismethoden}
 
 direkter Beweis, indirekter Beweis, vollständige Induktion\\
 $0+1+2+ \dots + n = n \cdot (n+1) \div 2$
+$\Box$
 
 \part{Gleichungen, Ungleichungen und Gleichungssysteme}
 
