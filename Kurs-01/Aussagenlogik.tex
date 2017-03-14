@@ -16,11 +16,13 @@
 \newtheorem{satz}{Satz}[section] % Nummerierung nach Abschnitten
 \newtheorem{proposition}[satz]{Proposition}
 \newtheorem{korollar}[satz]{Korollar}
+\newtheorem{lemma}[satz]{Lemma}
 
 \theorembodyfont{\upshape}
 \newtheorem{beispiel}[satz]{Beispiel}
 \newtheorem{bemerkung}[satz]{Bemerkung}
 \newtheorem{definition}[satz]{Definition} %[section]
+\newtheorem{algorithmus}[satz]{Algorithmus}
 
 \theoremstyle{nonumberplain}
 \theoremheaderfont{\itshape}
@@ -259,7 +261,7 @@ Für eine Menge $M$ von Objekten und ein Prädikat $P: M \to \lbrace 0,1 \rbrace
 \end{center}
 
 
-\part{Der nun folgende Teil des Dokumentes ist noch in Arbeit und besteht größtenteils aus Ideensammlungen und Auflistungen möglicher Themen für die Förderung begabter Schüler}
+%\part{Der nun folgende Teil des Dokumentes ist noch in Arbeit und besteht größtenteils aus Ideensammlungen und Auflistungen möglicher Themen für die Förderung begabter Schüler}
 
 \part{Rechnen mit Kongruenzen}
 
@@ -277,17 +279,107 @@ Ist dagegen $a$ kein Teiler von $b$, schreibt man auch $a \nmid b$.
 Es gilt $a \nmid b \Leftrightarrow \neg (a \mid b)$ sowie $a \nmid b \Leftrightarrow \forall m \in \mathbb{Z} : a \cdot m \neq b$.
 \end{bemerkung}
 
-\begin{beispiel} \hspace{1cm}\\
-\begin{tabular}{ccccc}
-	$2 \mid 2$ & $2 \mid 4$ & $2\mid 6$ & $2 \mid 18$ & $2 \mid 98$ \\
-	$3 \mid 6$ & $3 \mid 15$ & $3 \mid 30$ & $3 \mid 33$ & $3 \mid 3$ \\
-\end{tabular}
+\begin{definition}
+Der größte gemeinsame Teiler $ggT(a,b)$ zweier natürlicher Zahlen $a,b \in \mathbb{N}$ ist die größte natürliche Zahl $d$, für die $(d \mid a) \land (d \mid b)$ gilt.
+\end{definition}
+
+\begin{lemma}\label{l:sumteiler}
+Wenn eine ganze Zahl $m$ zwei ganze Zahlen $a$ und $b$ teilt, dann teilt $m$ auch deren Summe.
+\[
+(m \mid a) \land (m \mid b) \hspace*{1ex} \Rightarrow \hspace{1ex}(m \mid (a + b))
+\]
+\end{lemma}
+
+\begin{beweis}
+\begin{align*}
+& (m \mid a) \land (m \mid b) \\
+\implies & \exists x : a = x \cdot m \hspace{1ex} \land \hspace{1ex} \exists y : b = y \cdot m \\
+\implies & \exists x,y : a+b = x \cdot m + y \cdot m = (x+y) \cdot m \\
+\implies & \exists z : a+b = z\cdot m, \hspace{3ex} (z := x+y)\\
+\implies & m \mid (a+b)
+\end{align*}
+\end{beweis}
+
+\begin{definition}[Modulooperator]\label{d:mod}
+Man definiert eine Operation $\bmod$, sodass $a \bmod b$ der Rest beim Teilen von a durch b ist.\\
+$ \bmod : \mathbb{Z} \times \mathbb{N}^+ \to \mathbb{N} : (a,b) \mapsto a \bmod b$ \hspace{5ex} mit
+$ (a \bmod b = r) \land (0 \leq r < b) \land (\exists k \in \mathbb{Z}: a = k \cdot b + r) $
+\end{definition}
+
+\begin{bemerkung}
+Der Rest $r = a \bmod b$ aus Definition \ref{d:mod} ist eindeutig bestimmt.
+\end{bemerkung}
+
+\begin{beweis}
+Angenommen, es gäbe zwei Reste $r_1, r_2$ mit $r_1 \neq r_2$, welche die Bedingungen in Definition \ref{d:mod} erfüllen.
+Dann gibt es zwei ganze Zahlen $k_1$ und $k_2$ mit $k_1 \cdot b + r_1 = a = k_2 \cdot b + r_2$. Daraus folgt $r_1 - r_2 = (k_2 -k_1) \cdot b$. Wegen  $r_1 \neq r_2$ gilt  $|r_1 - r_2| \neq 0$. Dann muss $b$ ein Teiler von $|r_1 - r_2|$ sein. Weil aber $0 \leq r_i < b$ für $i=1,2$ gilt, folgt dann auch $|r_1 - r_2| < b$. Das steht im Widerspruch zur Aussage, dass $b$ die Zahl $|r_1 - r_2|$ teilt.\\
+$\implies$ Es gibt keine zwei verschiedenen Reste.
+\end{beweis}
+
+Durch diesen Beweis haben wird uns klargemacht, dass \textbf{mod} auch wirklich eine \textit{Funktion} ist, indem wir nachgewiesen haben, dass \textbf{mod} rechtseindeutig ist.
+
+\begin{definition}
+Für zwei ganze Zahlen $a$ und $b$, welche beim Teilen durch $m$ den gleichen Rest lassen, schreiben wir auch $a \equiv b \pmod{m}$ (sprich "`a ist kongruent zu b modulo m"'). Formal lautet das:
+\[
+a \equiv b \pmod{m} :\Leftrightarrow a \bmod m = b \bmod m
+\]
+Man sagt auch, dass $a$ und $b$ in derselben Restklasse mod $m$ liegen.
+\end{definition}
+
+\begin{satz}\label{s:mod}
+Für Zahlen $a,b \in \mathbb{Z}$ und ein Modular $m \in \mathbb{N}^+$ gelten folgende Beziehungen:\\
+\begin{align}
+(a + b) \bmod m = ((a \bmod m) + (b \bmod m)) \bmod m\\
+(a - b) \bmod m = ((a \bmod m) - (b \bmod m)) \bmod m\\
+(a \cdot b) \bmod m = ((a \bmod m) \cdot (b \bmod m)) \bmod m\\
+**(a \div b) \bmod m = ((a \bmod m) \div (b \bmod m)) \bmod m
+\end{align}
+\end{satz}
+
+\begin{bemerkung}
+Gleichung (4) ist mit etwas größerer Vorsicht zu genießen. Wenn man $1 \div x$ als "`multiplikatives Inverses von $x$ modulo $m$"' interpretiert, ist es auch sinnvoll, Reste von gebrochenen Zahlen zu betrachten. Dies allerdings führt für unseren Kurs ein bisschen zu weit, weswegen wir Gleichung (4) zunächst nicht vordergründig behandeln werden.
+\end{bemerkung}
+
+\begin{beispiel}
+Mittels der Rechenregeln von Satz \ref{s:mod} ist es möglich, den Rechenaufwand erheblich zu reduzieren, wenn nicht nach exakten Zahlen, sondern bestimmten Resten gefragt wird. So ist zum Beispiel $25497 + 45038 + 45938 + 1234 \bmod 3 = 0 + 2 + 2 + 1 \bmod 3 = 2$. Die Summe dieser beachtlich großen Zahlen, lässt also beim Teilen durch $3$ den Rest $2$. Dafür haben wir die Zahlen nur kurz angesehen und auch keinen Taschenrechner benötigt.
 \end{beispiel}
 
-Lemma über Teiler der Summe\\
-Def mod Funktion\\
-Def mod Kongruenz\\
+\section{Sätze über Teiler und Faktoren}
 
+\begin{satz}[Der euklidische Algorithmus]\label{s:eukl}
+	\begin{align*}
+		\forall a \neq 0 &: ggT(a,0) = a \\
+		\forall b \neq 0 &: ggT(a,b) = ggT(b, a\bmod b)
+	\end{align*}
+\end{satz}
+
+\begin{beweis}
+Den trivialen Fall in der ersten Zeile möchte ich hier direkt überspringen. Betrachten wir den Schritt, welcher in der zweiten Zeile vollzogen wird:\\
+\centerline{$a \hspace{3ex} = \hspace{3ex} k \cdot b \hspace{3ex} + \hspace{3ex} r $}\\
+Man kann den euklidischen Algorithmus anwenden, indem man ein $k \in \mathbb{Z}$ sucht, sodass obige Gleichung mit einem Rest $r$ mit $0 \leq r < b$ erfüllt ist. Dann hat man $a \bmod b = r$ bestimmt.
+Die Behauptung lautet nun, dass der größte gemeinsame Teiler von $a$ und $b$ gleich dem größten gemeinsamen Teiler von $b$ und $(a \bmod b)$ ist.
+
+Nach Lemma~\ref{l:sumteiler} wissen wir, dass jeder gemeinsame Teiler von $a$ und $b$ auch ein Teiler von $r$ ist. Insbesondere ist also der größte gemeinsame Teiler von $a$ und $b$ ein Teiler von $r$ und natürlich auch von $b$. Also ist er kleiner oder gleich dem größten gemeinsamen Teiler von $b$ und $r$ ($ggT(a,b) \leq ggT(b,r)$). Andersherum gilt aber wegen Lemma \ref{l:sumteiler} auch, dass jeder gemeinsame Teiler von $b$ und $r$, also insbesondere der größte gemeinsame Teiler beider Zahlen, ein Teiler von $a$ (und von $b$ sowieso) ist. Also ist dieser Teiler kleiner oder gleich dem größten gemeinsamen Teiler von $a$ und $b$ ($ggT(b,r) \leq ggT(a,b)$).
+Aus $ggT(a,b) \leq ggT(b,r)$ und $ggT(b,r) \leq ggT(a,b)$ folgt unmittelbar $ggT(a,b)=ggT(b,r)$ und damit die Behauptung.
+\end{beweis}
+
+\begin{korollar}[Lemma von Bézout]
+Es seien $m,n \in \mathbb{N}$ mit der Einschränkung, dass nicht beide $0$ sind. Dann gibt es ganze Zahlen $a,b \in \mathbb{Z} $ mit $ggT(m,n) = am + bn$.
+\end{korollar}
+
+\begin{beweis}[**Zusatz für Interessierte]
+mittels Induktion über n.\\
+Induktionsanfang: Für $n = 0$ gilt $ggT(m,n) = 1m + 0n$.\\
+Induktionsvoraussetzung: $\forall n<n_0$ gibt es ganze Zahlen $a,b$ mit $ggT(m,n) = am + bn$\\
+Induktionsbehauptung: Es gibt ganze Zahlen $a,b$ mit $ggT(m,n_0) = am + bn_0$\\
+Induktionsbeweis: Man bestimme Zahlen $q,r$ mit $m = q \cdot n + r$ und $r<n$. Weil $r<n$ gibt es Zahlen $a',b' \in \mathbb{Z}$ mit $ggT(n,r) = a'n + b'r$. Mit Satz \ref{s:eukl} folgt:\\
+$ggT(m,n) = ggT(n,r) = a'n + b'r = a'n + b'(m - qn) = b'm + (a'-b'q)n$\\
+Mit $a:= b'$ und $b:=a'-b'q$ folgt die [Induktions-] Behauptung.
+\end{beweis}
+
+\begin{korollar}[Lemma von Euklid]
+Wenn eine Primzahl das Produkt zweier natürlicher Zahlen teilt, dann teilt sie auch mindestens einen der Faktoren.
+\end{korollar}
 
 \part{Elementare Beweismethoden}
 
