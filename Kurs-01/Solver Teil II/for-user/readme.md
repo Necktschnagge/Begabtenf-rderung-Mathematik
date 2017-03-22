@@ -1,0 +1,1 @@
+Um die Anwendung zu starten, laden Sie release.zip herunter und entpacken das Verzeichnis. Führen Sie anschließend das Programm __euklid-solver.exe__ aus. Wichtig ist, dass Sie alle anderen Dateien mit entpackt haben, da es sich hier um benötigte Programmbibliotheken handelt.
