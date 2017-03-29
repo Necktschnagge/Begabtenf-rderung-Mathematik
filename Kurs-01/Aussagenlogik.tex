@@ -50,7 +50,7 @@ Eine Aussage ist ein wohldefinierter mathematischer Ausdruck, der entweder 1 (= 
 \begin{beispiel}
 	$1$ ist eine wahre Aussage. $0$ ist eine falsche Aussage. Die Tiefe des verketteten Funktionsaufrufes ist jeweils $null$. Auch $(5\mid21) = wahr$ ist eine (zugegebenermaßen \textit{falsche}) Aussage. Hier beträgt die Tiefe $zwei$, da auf oberster Ebene eine Gleichheit behauptet wird und auf der linken Seite auf nächst tieferer Ebene eine Teilerbeziehung ($5$ teilt $21$). $5\mid21$ ist bekanntlich falsch, $falsch=wahr$ und damit die gesamte Aussage ist folglich auch falsch.
 	
-	\begin{multicols}{2}
+	\begin{multicols}{2}[]
 		\begin{enumerate}[(a)]
 			\item $7$ ist eine Primzahl.
 			\item $2$ ist Teiler von $4$.
@@ -65,7 +65,7 @@ Eine Aussage ist ein wohldefinierter mathematischer Ausdruck, der entweder 1 (= 
 			\item $2\cdot(x+3)=2\cdot x+6$
 			\item $3$ ist kein Teiler von $4$ und $p=wahr$.
 			\item Für alle natürlichen Zahlen $n$ gilt: $2\cdot n = n+n$
-			\item Es existiert eine natürliche Zahl $x$ mit ${234<x<235}$.
+			\item Es existiert eine natürliche Zahl $x$ mit \\ ${234<x<235}$.
 		\end{enumerate}
 	\end{multicols}
 
@@ -106,9 +106,9 @@ Den Ausdruck $\neg A$ liest man als \glqq nicht A\grqq .
 	Disjunktion: $\lor : 2 \times 2 \to 2 : (A,B) \mapsto A \lor B$ &
 		(sprich \glqq A oder B\grqq )\\
 	Implikation: $\Rightarrow : 2 \times 2 \to 2 : (A,B) \mapsto A \Rightarrow B$ &
-		(sprich \glqq wenn A, dann B\grqq , auch \glqq A impliziert B\grqq )\\
+		(sprich \glqq wenn A, dann B\grqq , \glqq A impliziert B\grqq )\\
 	Äquivalenz: $\Leftrightarrow : 2 \times 2 \to 2 : (A,B) \mapsto A \Leftrightarrow B$ &
-		(sprich \glqq A genau dann, wenn B\grqq, auch \glqq A ist äquivalent zu B\grqq )
+		(sprich \glqq A genau dann, wenn B\grqq, \glqq A ist äquivalent zu B\grqq )
 \end{tabular}
 \end{center}
 
@@ -326,7 +326,7 @@ Man sagt auch, dass $a$ und $b$ in derselben Restklasse mod $m$ liegen.
 \end{definition}
 
 \begin{satz}\label{s:mod}
-Für Zahlen $a,b \in \mathbb{Z}$ und ein Modular $m \in \mathbb{N}^+$ gelten folgende Beziehungen:\\
+Für Zahlen $a,b \in \mathbb{Z}$ und ein Modular $m \in \mathbb{N}^+$ gelten folgende Beziehungen:
 \begin{align}
 (a + b) \bmod m = ((a \bmod m) + (b \bmod m)) \bmod m\\
 (a - b) \bmod m = ((a \bmod m) - (b \bmod m)) \bmod m\\
